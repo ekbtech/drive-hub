@@ -1,0 +1,21 @@
+# PHP / local runtime
+vendor/
+.env
+.env.*
+*.log
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local uploads and runtime artifacts
+uploads/*
+!uploads/.gitkeep
+backend/fallback-users.json
+*.sqlite
+*.sql
+
+# WAMP / local server state
+wamp64/

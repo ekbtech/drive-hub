@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Browse Cars — Pro Car</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body class="bg-dark text-light">
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary mb-4"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold" href="index.html"
+          ><span class="text-warning">Pro</span>Car</a
+        >
+        <div class="ms-auto">
+          <button
+            type="button"
+            class="btn btn-outline-light btn-sm me-2"
+            onclick="refreshPage()"
+            title="Refresh fleet"
+            aria-label="Refresh fleet"
+          >
+            ↻
+          </button>
+          <a href="auth/login.html" class="btn btn-outline-warning btn-sm me-2"
+            >Sign In</a
+          >
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Filters Sidebar -->
+        <div class="col-md-3 mb-4">
+          <div class="card bg-secondary border-secondary">
+            <div class="card-body">
+              <h5 class="card-title mb-3">Filters</h5>
+              <div class="mb-3">
+                <label class="form-label" for="filter-category">Category</label>
+                <select
+                  id="filter-category"
+                  title="Filter cars by category"
+                  class="form-select form-select-sm bg-dark text-light border-secondary"
+                >
+                  <option value="">All Categories</option>
+                  <option value="Economy">Economy</option>
+                  <option value="Sedan">Sedan</option>
+                  <option value="SUV">SUV</option>
+                  <option value="Luxury">Luxury</option>
+                  <option value="Van">Van</option>
+                  <option value="Pickup">Pickup</option>
+                  <option value="Electric">Electric</option>
+                  <option value="Convertible">Convertible</option>
+                  <option value="Executive">Executive</option>
+                  <option value="Hybrid">Hybrid</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cars Grid -->
+        <div class="col-md-9">
+          <div
+            class="mb-4 d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3"
+          >
+            <div>
+              <h2 class="mb-1">Available Cars</h2>
+              <p class="text-secondary mb-0">
+                Search by make, model, category, or location.
+              </p>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+              <div class="input-group input-group-sm cars-page-search">
+                <label class="visually-hidden" for="car-search"
+                  >Search cars</label
+                >
+                <span
+                  class="input-group-text bg-dark border-secondary text-secondary"
+                  aria-hidden="true"
+                  >🔎</span
+                >
+                <input
+                  id="car-search"
+                  type="text"
+                  class="form-control bg-dark text-light border-secondary"
+                  placeholder="Search cars"
+                />
+              </div>
+              <label class="visually-hidden" for="sort-cars">Sort cars</label>
+              <select
+                id="sort-cars"
+                class="form-select form-select-sm bg-dark text-light border-secondary cars-page-sort"
+              >
+                <option value="featured">Featured first</option>
+                <option value="price-asc">Price: Low to High</option>
+                <option value="price-desc">Price: High to Low</option>
+                <option value="year-desc">Newest first</option>
+                <option value="name-asc">Name A-Z</option>
+              </select>
+            </div>
+          </div>
+          <div id="cars-grid" class="row gap-3"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Modal -->
+    <div class="modal fade" id="bookingModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content bg-secondary border-secondary">
+          <div class="modal-header">
+            <h5 class="modal-title">Book This Car</h5>
+            <button
+              type="button"
+              class="btn-close btn-close-white"
+              data-bs-dismiss="modal"
+              aria-label="Close booking dialog"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <div
+              id="booking-car-preview"
+              class="booking-car-preview mb-4"
+            ></div>
+            <form id="booking-form">
+              <input type="hidden" id="booking-car-id" />
+              <div class="mb-3">
+                <label class="form-label" for="start-date">Start Date</label>
+                <input
+                  id="start-date"
+                  type="datetime-local"
+                  class="form-control bg-dark text-light border-secondary"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="end-date">End Date</label>
+                <input
+                  id="end-date"
+                  type="datetime-local"
+                  class="form-control bg-dark text-light border-secondary"
+                  required
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-label" for="pickup-location"
+                  >Pickup Location</label
+                >
+                <input
+                  id="pickup-location"
+                  type="text"
+                  class="form-control bg-dark text-light border-secondary"
+                  placeholder="e.g. Lagos Airport"
+                />
+              </div>
+              <div class="mb-3">
+                <label class="form-check">
+                  <input
+                    id="need-driver"
+                    type="checkbox"
+                    class="form-check-input"
+                  />
+                  <span class="form-check-label">I need a driver (+$25)</span>
+                </label>
+              </div>
+              <div class="mb-3">
+                <p>
+                  Total Price:
+                  <strong class="text-warning" id="total-price">$0</strong>
+                </p>
+              </div>
+              <button
+                type="submit"
+                class="btn btn-warning text-dark fw-semibold w-100"
+                aria-label="Confirm booking"
+              >
+                Confirm Booking
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <footer class="bg-black border-top border-secondary mt-5 py-4 text-center">
+      <p class="text-secondary">&copy; 2026 Pro Car. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/api.js?v=20260721"></script>
+    <script src="js/cars.js?v=20260721b"></script>
+  </body>
+</html>

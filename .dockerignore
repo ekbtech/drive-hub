@@ -1,0 +1,9 @@
+node_modules
+.git
+.github
+tests
+.vscode
+uploads/*
+!uploads/.gitkeep
+*.log
+vendor

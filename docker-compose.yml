@@ -1,0 +1,33 @@
+version: "3.8"
+
+services:
+  web:
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      MYSQL_DB: pro_car
+      MYSQL_USER: procar
+      MYSQL_PASS: secret
+    depends_on:
+      - db
+    volumes:
+      - ./:/var/www/html:cached
+
+  db:
+    image: mysql:8.0
+    restart: always
+    environment:
+      MYSQL_DATABASE: pro_car
+      MYSQL_USER: procar
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: rootpassword
+    ports:
+      - "3306:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+
+volumes:
+  db_data:

@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Pro Car — Car Rental Without Clutter</title>
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="manifest" href="manifest.webmanifest" />
+  </head>
+  <body class="bg-dark text-light">
+    <nav
+      class="navbar navbar-expand-lg navbar-dark bg-black border-bottom border-secondary"
+    >
+      <div class="container">
+        <a class="navbar-brand fw-bold fs-4" href="index.html">
+          <span class="text-warning">Pro</span>Car
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNav"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link" href="cars.html">Browse Cars</a>
+            </li>
+            <li class="nav-item d-flex align-items-center">
+              <button
+                type="button"
+                class="btn btn-outline-light btn-sm ms-lg-2"
+                onclick="refreshPage()"
+                title="Refresh page"
+                aria-label="Refresh page"
+              >
+                ↻
+              </button>
+            </li>
+            <li class="nav-item" id="nav-user-menu" style="display: none">
+              <div class="nav-link dropdown">
+                <a
+                  class="nav-link dropdown-toggle"
+                  href="#"
+                  id="userDropdown"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                >
+                  <span id="user-name">Account</span>
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="userDropdown">
+                  <li>
+                    <a class="dropdown-item" href="dashboard.html">Dashboard</a>
+                  </li>
+                  <li><hr class="dropdown-divider" /></li>
+                  <li>
+                    <a class="dropdown-item" href="#" onclick="logout()"
+                      >Logout</a
+                    >
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li class="nav-item" id="nav-auth" style="display: block">
+              <a class="nav-link" href="auth/login.html">Sign In</a>
+            </li>
+            <li class="nav-item" id="nav-register" style="display: block">
+              <a class="nav-link" href="auth/register.html">Register</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <main>
+      <section class="home-hero">
+        <div class="container home-hero-inner">
+          <div class="row align-items-center g-5">
+            <div class="col-lg-7">
+              <span class="eyebrow">A better way to move</span>
+              <h1>Drive something that feels like <em>you.</em></h1>
+              <p class="home-hero-copy">
+                Discover a considered collection of cars, vans, and SUVs from
+                trusted local providers. Compare clearly, book confidently, and
+                get on with the journey.
+              </p>
+              <div class="d-flex flex-wrap gap-3 mb-4">
+                <a
+                  href="cars.html"
+                  class="btn btn-warning btn-lg text-dark fw-semibold"
+                  >Explore the fleet <span aria-hidden="true">↗</span></a
+                >
+                <a
+                  href="auth/register.html"
+                  class="btn btn-outline-light btn-lg"
+                  >Join Pro Car</a
+                >
+              </div>
+              <div class="hero-proof">
+                <span class="proof-mark">✦</span><span>Transparent pricing</span
+                ><span class="proof-divider"></span><span>Local providers</span
+                ><span class="proof-divider"></span
+                ><span>Flexible bookings</span>
+              </div>
+            </div>
+            <div class="col-lg-5">
+              <div class="hero-visual" aria-label="Featured premium vehicle">
+                <div class="hero-visual-label">
+                  Featured drive <span>01 / 04</span>
+                </div>
+                <img
+                  src="https://images.unsplash.com/photo-1553440569-bcc63803a83d?auto=format&fit=crop&w=1200&q=85"
+                  alt="Premium car on an open road"
+                />
+                <div class="hero-visual-caption">
+                  <span
+                    >Make the ordinary<br /><strong
+                      >feel memorable.</strong
+                    ></span
+                  ><span class="hero-arrow">↗</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <form id="home-search-form" class="home-search-bar">
+            <label for="home-search">Find your next car</label>
+            <div class="home-search-controls">
+              <input
+                id="home-search"
+                type="search"
+                placeholder="Search make, model, category, or city"
+              /><select id="home-category" aria-label="Choose a category">
+                <option value="">Every category</option>
+                <option>Sedan</option>
+                <option>SUV</option>
+                <option>Luxury</option>
+                <option>Electric</option>
+                <option>Van</option>
+                <option>Convertible</option></select
+              ><button
+                class="btn btn-warning text-dark fw-semibold"
+                type="submit"
+              >
+                Search fleet
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section class="home-metrics">
+        <div class="container">
+          <div class="row g-0" id="hero-stats">
+            <div class="col-md-3 metric">
+              <strong>—</strong><span>Vehicles ready</span>
+            </div>
+            <div class="col-md-3 metric">
+              <strong>—</strong><span>Categories</span>
+            </div>
+            <div class="col-md-3 metric">
+              <strong>—</strong><span>Locations</span>
+            </div>
+            <div class="col-md-3 metric">
+              <strong>24/7</strong><span>Browse online</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="home-section container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">Find your fit</span>
+            <h2>There is a car for every kind of day.</h2>
+          </div>
+          <a href="cars.html" class="text-warning fw-semibold"
+            >View the full fleet <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <div class="category-grid">
+          <a
+            href="cars.html?category=Sedan"
+            class="category-tile category-sedan"
+            ><span>01</span><strong>Everyday ease</strong
+            ><small>Sedans & compact cars</small></a
+          ><a href="cars.html?category=SUV" class="category-tile category-suv"
+            ><span>02</span><strong>Room to roam</strong
+            ><small>SUVs & family drives</small></a
+          ><a
+            href="cars.html?category=Luxury"
+            class="category-tile category-luxury"
+            ><span>03</span><strong>Arrive differently</strong
+            ><small>Luxury & executive</small></a
+          ><a
+            href="cars.html?category=Electric"
+            class="category-tile category-electric"
+            ><span>04</span><strong>Go electric</strong
+            ><small>Quiet, clean performance</small></a
+          >
+        </div>
+      </section>
+
+      <section class="featured-cars home-section container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">The edit</span>
+            <h2>Cars worth getting into.</h2>
+          </div>
+          <a href="cars.html" class="text-warning fw-semibold"
+            >Browse all cars <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <div id="featured-cars-grid" class="row g-4"></div>
+      </section>
+
+      <section class="reviews home-section container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">From the road</span>
+            <h2>Good journeys, shared.</h2>
+          </div>
+          <a href="review.html" class="text-warning fw-semibold"
+            >Leave a review <span aria-hidden="true">↗</span></a
+          >
+        </div>
+        <div id="reviews-grid" class="row g-4"></div>
+      </section>
+    </main>
+
+    <footer class="bg-black border-top border-secondary mt-5 py-4 text-center">
+      <p class="text-secondary">&copy; 2026 Pro Car. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/api.js?v=20260721"></script>
+    <script src="js/app.js?v=20260721b"></script>
+    <script src="js/install.js"></script>
+  </body>
+</html>
